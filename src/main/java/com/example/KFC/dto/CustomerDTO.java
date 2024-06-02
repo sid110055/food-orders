@@ -1,21 +1,27 @@
 package com.example.KFC.dto;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 
+@Entity
 public class CustomerDTO {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Min(value = 1,message = "CustomerID must be greater than or equal to 1 ")
     private int customerId;
     @NotBlank(message = "Name cannot be empty")
     @Size(min=2, max=50, message = "Name should be between 2 and 50 characters")
     private String name;
-
     @NotBlank(message = "Phone number cannot be empty")
     @Pattern(regexp = "^\\+?[0-9]{1,3}?[-. ]?(\\(?\\d{1,4}\\)?[-. ]?)?(\\d{1,4}[-. ]?){1,3}$", message = "Phone Number is invalid")
-
-    // @Pattern(regexp = "^\\+?[0-9]{1,3}?[-. ]?(\\(?\\d{1,4}\\)?[-. ]?)?(\\d{1,4}[-. ]?){1,3}$",message = "Phone Number is invalid")
     private String phoneNumber;
+
+    public CustomerDTO() {
+    }
 
     public CustomerDTO(int customerId, String name, String phoneNumber) {
         this.customerId = customerId;

@@ -20,14 +20,12 @@ import java.util.List;
 @RequestMapping("/kfc")
 public class KfcMenuApi {
 
-
     private KfcService kfcservice;
     @Autowired
     public KfcMenuApi(KfcService kfcservice) {
         this.kfcservice = kfcservice;
     }
 
-    //http://localhost:8080/kfc/customer/1
     @GetMapping("/customer/{id}")
     public ResponseEntity<CustomerDTO> getCustomerById(@PathVariable int id)
     {
@@ -39,21 +37,12 @@ public class KfcMenuApi {
         return new ResponseEntity<>(customer,HttpStatus.OK);
     }
 
-//    {
-//        "customerId": 1,
-//            "name": "Peter Sagar",
-//            "phoneNumber": "+1 8521479637"
-//    }
-
-    //http://localhost:8080/kfc/customer
     @PostMapping("/customer")
     public ResponseEntity<CustomerDTO> addCustomer(@Valid  @RequestBody CustomerDTO customer)
     {  CustomerDTO addedCustomer = kfcservice.addCustomer(customer);
         return new ResponseEntity<>(addedCustomer,HttpStatus.CREATED);
     }
 
-
-    //http://localhost:8080/kfc/menu/1
     @GetMapping("/menu/{id}")
     public ResponseEntity<MenuDTO> getMenuById(@PathVariable int id)
     {
@@ -65,14 +54,6 @@ public class KfcMenuApi {
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
 
-
-    //    {
-//        "id": 1,
-//            "price": 25,
-//            "menuItem": "Chicken Popcorn"
-//    }
-
-    //http://localhost:8080/kfc/menu
     @PostMapping("/menu")
     public ResponseEntity<MenuDTO> addMenu( @Valid @RequestBody MenuDTO menu)
     {
@@ -80,7 +61,6 @@ public class KfcMenuApi {
         return new ResponseEntity<>(addedMenu, HttpStatus.CREATED);
     }
 
-    //http://localhost:8080/kfc/addon/1
     @GetMapping("/addon/{id}")
     public ResponseEntity<AddOnDTO> getAddOnById(@PathVariable int id)
     {
@@ -88,13 +68,7 @@ public class KfcMenuApi {
         if(addon == null){return new ResponseEntity<>(HttpStatus.NOT_FOUND);}
         return new ResponseEntity<>(addon, HttpStatus.OK);
     }
-    //    {
-//        "id": 1,
-//            "price": 25,
-//            "description": "Chicken Popcorn"
-//    }
 
-    //http://localhost:8080/kfc/addon
     @PostMapping("addon")
     public ResponseEntity<AddOnDTO> addAddOn( @Valid @RequestBody AddOnDTO addon)
     {
